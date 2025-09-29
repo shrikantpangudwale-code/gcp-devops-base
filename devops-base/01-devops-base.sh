@@ -3,7 +3,8 @@
 export terraform_dir="terraform"
 
 # Source config file
-source ./.env ../configfile
+source ./.env
+source ../configfile
 
 # Update actual values of variables from config file
 sed -i -e "s%GCP_PROJECT%${gcp_project}%g" -e "s%GCP_REGION%${gcp_region}%g" -e "s%GCP_ZONE%${gcp_zone}%g" -e "s%GITHUB_BASE_URL%${github_base_url}%g" -e "s%GITHUB_USER%${github_user}%g" -e "s%GITHUB_CREDS%${github_cred}%g" -e "s%DESEC_API_TOKEN%${DESEC_API_TOKEN}%g" -e "s%DESEC_EMAIL%${DESEC_Email}%g" ./terraform/variables.tf
