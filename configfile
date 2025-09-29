@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+gcp_project="di-gcp-351221"
+gcp_gcr_project="di-gcp-351221"
+gcp_region="asia-south1"
+gcp_zone="asia-south1-a"
+terraform_gcs_name="devops-terraform-state-01"
+devops_dir_path="${1}/gcp-devops"
+script_path="${devops_dir_path}/devops_shell_scripts"
+appln_dir_path="${1}/application-services"
+domain="nttd.dedyn.io"
+jenkins_subdomain="jenkins"
+app_subdomain="app"
+
+github_base_url="https://github.com/shrikantpangudwale-code/gcp-devops-base.git"
