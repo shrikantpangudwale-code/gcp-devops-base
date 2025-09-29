@@ -1,5 +1,3 @@
-#!groovy
-
 import jenkins.model.*
 import hudson.security.*
 import hudson.model.UpdateSite
@@ -10,7 +8,7 @@ def instance = Jenkins.getInstance()
 def username = "admin"
 def password = "admin"
 
-println "--> creating admin user '${username}'"
+println "--> Creating admin user '${username}'"
 
 def hudsonRealm = new HudsonPrivateSecurityRealm(false)
 hudsonRealm.createAccount(username, password)
@@ -25,19 +23,21 @@ instance.save()
 // -------------------------
 
 def pluginShortName = "pipeline-stage-view"
-
-def instance = Jenkins.getInstance()
 def pluginManager = instance.getPluginManager()
 def updateCenter = instance.getUpdateCenter()
 
-// Check if plugin is already installed
+// Update plugin metadata
+println "--> Updating update center..."
+updateCenter.updateAllSites()
+sleep(10000)  // Optional wait to allow metadata update
+
 def plugin = pluginManager.getPlugin(pluginShortName)
 if (plugin != null) {
     println "Plugin '${pluginShortName}' is already installed."
     return
 }
 
-println "Installing plugin: '${pluginShortName}'..."
+println "--> Installing plugin: '${pluginShortName}'..."
 
 def pluginToInstall = updateCenter.getPlugin(pluginShortName)
 if (pluginToInstall == null) {
@@ -45,8 +45,10 @@ if (pluginToInstall == null) {
     return
 }
 
-// Install the plugin
 def installFuture = pluginToInstall.deploy()
-installFuture.get()  // Wait until plugin is installed
+installFuture.get()
 
-println "Plugin '${pluginShortName}' installed. A restart may be required."
+println "Plugin '${pluginShortName}' installed. A Jenkins restart may be required."
+
+// Optional safe restart
+Jenkins.instance.safeRestart()

@@ -20,7 +20,7 @@ sudo apt install -y jenkins
 
 # Place init.groovy.d
 sudo mkdir -p ${var_jenkins_dir}/init.groovy.d/
-sudo cp ./scripts/devops-base/04-init-jenkins.groovy ${var_jenkins_dir}/init.groovy.d/basic-security.groovy
+sudo cp ./${script_dir}/04-init-jenkins.groovy ${var_jenkins_dir}/init.groovy.d/basic-security.groovy
 sudo chown -R jenkins:jenkins ${var_jenkins_dir}/init.groovy.d/
 
 # Enable Jenkins

@@ -21,3 +21,11 @@ variable "github_user" {
 variable "github_cred" {
   default = "GITHUB_CREDS"
 }
+
+variable "api_token" {
+  default = "DESEC_API_TOKEN"
+}
+
+variable "email_id" {
+  default = "DESEC_EMAIL"
+}

@@ -1,9 +1,11 @@
+#!/bin/bash
+
+source ../configfile
+
 # Install nginx
 sudo apt-get update
 
 yes | sudo apt-get install nginx
-
-FQDN="${jenkins_subdomain}.${domain}"
 
 # Configure NGINX reverse proxy to Jenkins
 sudo tee /etc/nginx/sites-available/${jenkins_subdomain} <<EOF

@@ -1,7 +1,14 @@
 #!/bin/bash
 
-script_dir="scripts/devops-base"
-github_url_with_auth=$(echo "${github-base-url}" | sed -e "s/https:\/\//https:\/\/${github-user}:${github-password}@/")
+export script_dir="scripts/devops-base"
+
+github_base_url=`curl -s -H "Metadata-Flavor: Google" http://metadata.google.internal/computeMetadata/v1/instance/attributes/github-base-url`
+github_user=`curl -s -H "Metadata-Flavor: Google" http://metadata.google.internal/computeMetadata/v1/instance/attributes/github-user`
+github_password=`curl -s -H "Metadata-Flavor: Google" http://metadata.google.internal/computeMetadata/v1/instance/attributes/github-password`
+export api_token=`curl -s -H "Metadata-Flavor: Google" http://metadata.google.internal/computeMetadata/v1/instance/attributes/api_token`
+export email_id=`curl -s -H "Metadata-Flavor: Google" http://metadata.google.internal/computeMetadata/v1/instance/attributes/email_id`
+
+github_url_with_auth=$(echo "${github_base_url}" | sed -e "s/https:\/\//https:\/\/${github_user}:${github_password}@/")
 
 sudo apt-get update
 
@@ -12,6 +19,7 @@ echo "Cloning github repository..."
 git clone "${github_url_with_auth}" "scripts"
 
 ### ----------------------------------
+source ./scripts/configfile
 
 echo "Installing Jenkins and DevOps tools..."
 bash ./${script_dir}/03-install-jenkins.sh

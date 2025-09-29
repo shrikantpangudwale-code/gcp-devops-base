@@ -6,10 +6,6 @@ locals{
   vm_instance     = "devops-vm"
 }
 
-data "template_file" "startup-script-custom" {
-  template = file("./install-devops-tools.sh")
-}
-
 # resource used to create the service account
 resource "google_service_account" "service_account_user" {
   account_id   = local.service_account
@@ -98,6 +94,8 @@ resource "google_compute_instance" "devops-vm" {
     github-base-url = var.github_base_url
     github-user     = var.github_user
     github-password = var.github_cred
+    api_token       = var.api_token
+    email_id        = var.email_id
   }
 
   service_account {
