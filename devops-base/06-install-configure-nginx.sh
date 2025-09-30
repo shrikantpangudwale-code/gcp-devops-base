@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ../configfile
+source ./scripts/configfile
 
 # Install nginx
 sudo apt-get update
