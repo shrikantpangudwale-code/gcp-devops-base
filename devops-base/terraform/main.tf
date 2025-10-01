@@ -57,7 +57,7 @@ resource "google_compute_firewall" "custom-firewall" {
   source_ranges = ["0.0.0.0/0"]
   allow {
     protocol = "tcp"
-    ports    = ["22","80", "8080", "3000"]
+    ports    = ["22", "443", "80", "8080", "3000"]
   }
 
    allow {
