@@ -115,7 +115,7 @@ http {
 
     gzip on;
 
-    include /etc/nginx/conf.d/*.conf;
+    include /etc/nginx/conf.d/*;
 }
 EOF
 

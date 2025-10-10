@@ -77,7 +77,9 @@ resource "google_compute_instance" "devops-vm" {
   network_interface {
    network    = google_compute_network.custom-network.name
    subnetwork = google_compute_subnetwork.network-with-ip-ranges.name
-   access_config {}
+   access_config {
+    nat_ip = "35.207.234.25"
+   }
   }
 
   boot_disk {

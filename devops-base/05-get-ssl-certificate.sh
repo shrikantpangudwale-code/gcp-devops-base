@@ -7,19 +7,19 @@ source ./scripts/configfile
 export FQDN="${jenkins_subdomain}.${domain}"
 
 #Update A record for jenkins subdomain in desec.io
-EXTERNAL_IP=$(curl -s -H "Metadata-Flavor: Google" http://metadata.google.internal/computeMetadata/v1/instance/network-interfaces/0/access-configs/0/external-ip)
+# EXTERNAL_IP=$(curl -s -H "Metadata-Flavor: Google" http://metadata.google.internal/computeMetadata/v1/instance/network-interfaces/0/access-configs/0/external-ip)
 
-curl -X POST "https://desec.io/api/v1/domains/${domain}/rrsets/" \
-  -H "Authorization: Token ${api_token}" \
-  -H "Content-Type: application/json" \
-  -d "{
-        \"subname\": \"${jenkins_subdomain}\",
-        \"type\": \"A\",
-        \"records\": [\"${EXTERNAL_IP}\"],
-        \"ttl\": 3600
-      }"
+# curl -X POST "https://desec.io/api/v1/domains/${domain}/rrsets/" \
+#   -H "Authorization: Token ${api_token}" \
+#   -H "Content-Type: application/json" \
+#   -d "{
+#         \"subname\": \"${jenkins_subdomain}\",
+#         \"type\": \"A\",
+#         \"records\": [\"${EXTERNAL_IP}\"],
+#         \"ttl\": 3600
+#       }"
 
-sleep 100
+#sleep 100
 ### ----------------------------------
 
 # Install Certbot and deSEC plugin
@@ -36,7 +36,7 @@ sudo chmod 600 /etc/letsencrypt/desec.ini
 
 # Get certificate
 sudo certbot certonly \
-  --dns-desec \
+  --authenticator dns-desec \
   --dns-desec-credentials /etc/letsencrypt/desec.ini \
   --dns-desec-propagation-seconds 600 \
   -d "${FQDN}" \

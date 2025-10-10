@@ -5,7 +5,7 @@ var_jenkins_dir="/var/lib/jenkins"
 
 # Install dependencies
 sudo apt update
-sudo apt install -y openjdk-21-jre python3 curl unzip gnupg2 software-properties-common
+sudo apt install -y openjdk-21-jre python3 curl unzip gnupg2 software-properties-common python3-venv python3-pip npm
 
 # Install Jenkins
 curl -fsSL https://pkg.jenkins.io/debian/jenkins.io-2023.key | sudo tee \
