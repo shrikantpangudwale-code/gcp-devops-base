@@ -12,9 +12,10 @@ resource "google_service_account" "service_account_user" {
   display_name = local.service_account
 }
 
-resource "google_compute_address" "reserved_ip" {
-  name   = "devops-vm"
-  region = var.region
+data "google_compute_address" "reserved_ip" {
+  name    = "devops-vm"
+  region  = var.region
+  project = var.project
 }
 
 
@@ -84,7 +85,8 @@ resource "google_compute_instance" "devops-vm" {
    network    = google_compute_network.custom-network.name
    subnetwork = google_compute_subnetwork.network-with-ip-ranges.name
    access_config {
-    nat_ip = google_compute_address.reserved_ip.address
+    nat_ip = data.google_compute_address.reserved_ip.address
+	network_tier = "STANDARD"
    }
   }
 
