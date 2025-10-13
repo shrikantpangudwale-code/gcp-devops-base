@@ -2,7 +2,7 @@
 set -e
 
 JENKINS_HOME="/var/lib/jenkins"
-GROOVY_SRC="./groovy-scripts"
+GROOVY_SRC="./${1}/groovy-scripts"
 
 # Install dependencies
 sudo apt update

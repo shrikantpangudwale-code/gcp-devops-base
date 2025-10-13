@@ -10,6 +10,9 @@ if [[ -z "${jenkins_subdomain}" || -z "${FQDN}" ]]; then
     exit 1
 fi
 
+sudo apt update
+sudo apt install -y nginx 
+
 # Backup default nginx config
 if [ -f /etc/nginx/nginx.conf ]; then
     sudo cp /etc/nginx/nginx.conf /etc/nginx/nginx.conf.backup.$(date +%s)

@@ -22,7 +22,7 @@ git clone "${github_url_with_auth}" "scripts"
 source ./scripts/configfile
 
 echo "Installing Jenkins and DevOps tools..."
-bash ./${script_dir}/03-install-jenkins.sh
+bash ./${script_dir}/03-install-jenkins.sh ${script_dir}
 
 echo "Setting up SSL via Let's Encrypt (deSEC)..."
 bash ./${script_dir}/05-get-ssl-certificate.sh
