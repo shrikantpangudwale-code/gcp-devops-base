@@ -38,7 +38,7 @@ sudo chmod 600 /etc/letsencrypt/desec.ini
 sudo certbot certonly \
   --authenticator dns-desec \
   --dns-desec-credentials /etc/letsencrypt/desec.ini \
-  --dns-desec-propagation-seconds 600 \
+  --dns-desec-propagation-seconds 30 \
   -d "${FQDN}" \
   --agree-tos \
   --email "${email_id}" \
