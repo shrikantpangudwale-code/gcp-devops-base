@@ -99,7 +99,7 @@ resource "google_compute_instance" "devops-vm" {
 
   metadata = {
     startup-script  = file("../shell-scripts/01-startup-script.sh")
-    shutdown-script = file("../shell-scripts/06-jenkins-backup.sh")
+    #shutdown-script = file("../shell-scripts/06-jenkins-backup.sh")
     enable-oslogin  = true
     github-base-url = var.github_base_url
     github-user     = var.github_user

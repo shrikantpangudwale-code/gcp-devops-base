@@ -4,6 +4,7 @@ set -e
 script_dir=${1}
 source ./${script_dir}/configfile
 JENKINS_HOME="/var/lib/jenkins"
+jenkins_backup="/var/backups/jenkins"
 
 # Install dependencies
 sudo apt update
@@ -34,6 +35,10 @@ for script in ./${script_dir}/groovy-scripts/*.groovy; do
 done
 
 sudo chown -R jenkins:jenkins ${JENKINS_HOME}/init.groovy.d/
+
+#Create directory for backup
+sudo mkdir -p ${jenkins_backup}
+sudo chown -R jenkins:jenkins ${jenkins_backup}
 
 # Enable Jenkins
 echo "Enabling and starting Jenkins"

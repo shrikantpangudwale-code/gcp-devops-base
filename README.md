@@ -68,21 +68,21 @@ This repository contains the following subdirectories:
 
 ### Process
 
-1. **Clone the Repository**  
-  - Open the [Google Cloud Shell](https://shell.cloud.google.com) and clone the `gcp-devops-base` repository:
-   ```bash
-    git clone https://github.com/shrikantpangudwale-code/gcp-devops-base.git
-  ```  
-2. **Navigate to the Project Directory**
-  ```bash
-    cd gcp-devops-base
-  ```
-3. **Create `.env` file with Sensitive Credentials**
+1. **Create `.env` file with Sensitive Credentials**
   - `DESEC_Email=`
   - `DESEC_API_TOKEN=`
   - `github_user=`
   - `github_cred=` 
    - **Note**: The `.env` file is listed in `.gitignore` and is **not** part of the repository.
+2. **Clone the Repository**  
+  - Open the [Google Cloud Shell](https://shell.cloud.google.com) and clone the `gcp-devops-base` repository:
+   ```bash
+    git clone https://github.com/shrikantpangudwale-code/gcp-devops-base.git
+  ```  
+3. **Navigate to the Project Directory**
+  ```bash
+    cd gcp-devops-base
+  ```
 4. **Update environment specific values**
   - Edit the `configfile` and provide values according to your GCP and domain setup.
 5. **Make the Deployment Script Executable**
