@@ -12,12 +12,18 @@ resource "google_service_account" "service_account_user" {
   display_name = local.service_account
 }
 
+resource "google_compute_address" "reserved_ip" {
+  name   = "devops-vm"
+  region = var.region
+}
+
+
 resource "google_project_iam_member" "member-role" {
 for_each = toset([
-		"roles/dns.admin",
+	"roles/dns.admin",
     "roles/storage.admin",
     "roles/compute.admin",
-		#"roles/appengine.admin",
+	#"roles/appengine.admin",
     "roles/cloudbuild.builds.editor",
     "roles/iam.serviceAccountUser"
 	])
@@ -78,7 +84,7 @@ resource "google_compute_instance" "devops-vm" {
    network    = google_compute_network.custom-network.name
    subnetwork = google_compute_subnetwork.network-with-ip-ranges.name
    access_config {
-    nat_ip = "35.207.234.25"
+    nat_ip = google_compute_address.reserved_ip.address
    }
   }
 
