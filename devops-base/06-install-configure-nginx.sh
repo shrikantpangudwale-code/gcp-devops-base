@@ -2,15 +2,13 @@
 
 # Load configuration variables
 source ./scripts/configfile
+export FQDN="${jenkins_subdomain}.${domain}"
 
 # Sanity checks for required vars
 if [[ -z "${jenkins_subdomain}" || -z "${FQDN}" ]]; then
     echo "Error: ${jenkins_subdomain} or ${FQDN} not set in configfile"
     exit 1
 fi
-
-# Install nginx and certbot
-sudo apt-get update && sudo apt-get install -y nginx certbot python3-certbot-nginx
 
 # Backup default nginx config
 if [ -f /etc/nginx/nginx.conf ]; then
@@ -120,7 +118,6 @@ fi
 if [ ! -f /etc/letsencrypt/live/${FQDN}/fullchain.pem ]; then
     echo "SSL certificate not found for ${FQDN}..."
     exit 1
-    }
 else
     echo "SSL certificate already exists for ${FQDN}"
 fi
