@@ -1,8 +1,6 @@
 #!/bin/bash
 set -e
 
-var_jenkins_dir="/var/lib/jenkins"
-
 # Install dependencies
 sudo apt update
 sudo apt install -y openjdk-21-jre python3 curl unzip gnupg2 software-properties-common python3-venv python3-pip npm
@@ -19,9 +17,9 @@ sudo apt update
 sudo apt install -y jenkins
 
 # Place init.groovy.d
-sudo mkdir -p ${var_jenkins_dir}/init.groovy.d/
-sudo cp ./${script_dir}/04-init-jenkins.groovy ${var_jenkins_dir}/init.groovy.d/basic-security.groovy
-sudo chown -R jenkins:jenkins ${var_jenkins_dir}/init.groovy.d/
+sudo mkdir -p ${JENKINS_HOME}/init.groovy.d/
+sudo cp ./${script_dir}/04-init-jenkins.groovy ${JENKINS_HOME}/init.groovy.d/init.groovy
+sudo chown -R jenkins:jenkins ${JENKINS_HOME}/init.groovy.d/
 
 # Enable Jenkins
 sudo systemctl enable jenkins
