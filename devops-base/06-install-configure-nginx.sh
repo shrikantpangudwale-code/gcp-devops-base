@@ -127,5 +127,6 @@ fi
 
 # Reload nginx with new certs
 sudo systemctl restart nginx
+sudo systemctl restart jenkins
 
 echo "NGINX is set up as a reverse proxy for Jenkins at https://${FQDN}"
