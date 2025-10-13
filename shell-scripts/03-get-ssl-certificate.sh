@@ -2,7 +2,7 @@
 set -e
 
 # Load environment variables
-source ./scripts/configfile
+source ./${1}/configfile
 
 export FQDN="${jenkins_subdomain}.${domain}"
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export script_dir="scripts/devops-base"
+export script_dir="scripts"
 
 github_base_url=`curl -s -H "Metadata-Flavor: Google" http://metadata.google.internal/computeMetadata/v1/instance/attributes/github-base-url`
 github_user=`curl -s -H "Metadata-Flavor: Google" http://metadata.google.internal/computeMetadata/v1/instance/attributes/github-user`
@@ -16,22 +16,22 @@ sudo apt-get update
 sudo apt-get install git
 
 echo "Cloning github repository..."
-git clone "${github_url_with_auth}" "scripts"
+git clone "${github_url_with_auth}" "${script_dir}"
 
 ### ----------------------------------
-source ./scripts/configfile
+source ./${script_dir}/configfile
 
 echo "Installing Jenkins and DevOps tools..."
-bash ./${script_dir}/03-install-jenkins.sh ${script_dir}
+bash ./${script_dir}/shell-scripts/02-install-jenkins.sh ${script_dir}
 
 echo "Setting up SSL via Let's Encrypt (deSEC)..."
-bash ./${script_dir}/05-get-ssl-certificate.sh
+bash ./${script_dir}/shell-scripts/03-get-ssl-certificate.sh ${script_dir}
 
 echo "Configuring NGINX as reverse proxy..."
-bash ./${script_dir}/06-install-configure-nginx.sh
+bash ./${script_dir}/shell-scripts/04-install-configure-nginx.sh ${script_dir}
 
 echo "Installing terraform..."
-bash ./${script_dir}/07-install-terraform.sh
+bash ./${script_dir}/shell-scripts/05-install-terraform.sh
 
 echo "Setup complete. Access Jenkins at: https://${jenkins_subdomain}.${domain}"
 

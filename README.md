@@ -1,95 +1,120 @@
-# gcp-devops-code
+# gcp-devops-base
 
-Project developed by DevOps Engineers to automate the process of deploying node js application at AppEngine following CI/CD tools and technology on the Google Cloud Platform.
-List of tools used in this project are.
-1. GCP - Google App Engine, Google Compute Engine, Google Cloud Shell, Google Cloud Storage, Google Cloud DNS
-2. Jenkins
-3. Terraform
-4. Shell script
-5. Python
-6. Groovy
-<p></p>
-The basic Structure of project.<p></p><p align=center>
-<img width="360" alt="Readme pic" src="https://user-images.githubusercontent.com/106592300/178190993-d9e8056e-3c75-42b6-b347-4f1756b2985f.PNG"></p>
-<p></p> <p></p>
+This project is developed by DevOps Engineers to automate the deployment of a **Node.js application** on **Google App Engine** using modern CI/CD practices and tools on **Google Cloud Platform (GCP)**.
 
-This repository includes following directories.
-<table align="center">
-  <tr>
-    <th>1.</th>
-    <th> create-vm </th>
-    <td> The directory contains terraform script to create required GCP resources like Service-Account, Virtual Network, Subnet, Firewall rules & VM Instance. The shell script installs Java, Jenkins, Terraform, docker, kubectl, etc in VM Instance.</td>
-  </tr>
-  <tr>
-    <th>2.</th>
-    <th> create_cluster </th>
-    <td> The directory contains terraform script to create kubernetes cluster. It can be triggered from Jenkins. Check directory for more details. </td>
-  </tr>
-  <tr>
-    <th>3.</th>
-    <th> deploy_initial_services </th>
-    <td> The directory contains terraform script and .yaml file. This deploys the application to the kubernetes cluster. Check directory for more details.</td>
-  </tr>
-  <tr>
-    <th>4.</th>
-    <th> devops_shell_scripts </th>
-    <td> The directory contains different scipts required to deploy images, validate dns, update region, project from configfile.Check directory for more details.</td>
-  </tr>
-  <tr>
-    <th>5.</th>
-    <th> seperate_services_yaml </th>
-    <td> The directory contains .yaml for specific services of application. These are useful when you update a certain service in application.</td>
-  </tr>
-  <tr>
-    <th>6.</th>
-    <th> configfile </th>
-    <td> This file has important variables that you have to change as per your requiremet, like project_name, project_region, cluster_name, dns_zone, service name, etc.</td>
-  </tr>
-  <tr>
-    <th>7.</th>
-    <th> jenkins_jobs </th>
-    <td>This directory is the third part the project. This directory have the pipeline scripts to Create the cluster, Deploy the services, and Update the services.</td>
-  </tr>
-</table>
+### 🚀 Tools & Technologies Used
+
+1. **Google Cloud Platform**
+   - App Engine  
+   - Compute Engine  
+   - Cloud Shell  
+   - Cloud Storage  
+2. **Jenkins** (for CI/CD pipelines)  
+3. **Terraform** (for infrastructure provisioning)  
+4. **Shell Scripts** (for automation tasks)  
+5. **Python** (for CbN workflow execution scripts)  
+6. **Groovy** (for Jenkins configuration)
+
+---
+
+### 📁 Project Structure Overview
+
+<p align="center">
+  <img width="360" alt="Project Architecture" src="https://user-images.githubusercontent.com/106592300/178190993-d9e8056e-3c75-42b6-b347-4f1756b2985f.PNG">
+</p>
+
+### 📂 Repository Structure
+
+This repository contains the following subdirectories:
+
+| #  | Directory        | Description |
+|----|------------------|-------------|
+| 1. | `terraform`      | Contains Terraform scripts to provision key GCP resources such as a Service Account, Virtual Network, Subnet, Firewall Rules, and a VM Instance. |
+| 2. | `shell-scripts`  | Includes Bash scripts to install, configure, and restore Jenkins. It also installs Java Runtime, Terraform, Nginx, and Python utilities on the VM Instance. |
+| 3. | `groovy-scripts` | Contains Groovy scripts used by Jenkins to create an admin user and install required plugins automatically. |
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-### Requirements:
-1. Google Cloud Platform - Create GCP Project. Enable tools Google Kubernetes Engine, Google Compute Engine, Google Cloud registry, Google Cloud Storage, Google Cloud DNS if required. Also create DNS records(A,SOA, CNAME, NS) if required.
-2. The whole project code is available in three repositories i.e.
-   - application-services: This repository will have the application microservices with Dockerfile to make containers out of it. Note: check repository for more details [application-services](https://github.com/di-devops-poc/application-services).
-   - gcp-devops-code: This repository have the actual scripts to automate the process of deploying application on Kubernetes cluster.Check more details here. [gcp-devops-code](https://github.com/di-devops-poc/gcp-devops-code).
-   - jenkins-backup-code: This repository have the scripts to create pipeline jobs in Jenkins. Check repository for more details [here](https://github.com/di-devops-poc/jenkins-backup-code).
+### Pre-Requisites
 
-### Process:
-1. Clone [gcp-devops-code](https://github.com/di-devops-poc/gcp-devops-code) repository in Google cloud shell.
-2. Change the directory `cd gcp-devops-code/create-vm/`.
-3. Use the code `terraform init`, `terraform plan`, `terraform apply --auto-approve` to run the terraform script.
-   - Note: Till now a Virtual Machine, a Virtual Network/ Subnetwork should be created. Tools like Jenkins, Terraform, Kubectl, Docker and Java also have been installed in Virtual Machine. DNS 'A' record also have been updated.(Optional).
-4. Access the Jenkins tool on Virtual Machine on port 8080. You can access it directly using domain name if have created DNS record for it.
-   - Note: When accessing the Jenkins for the first time...
-     - Unlock Jenkins with initialAdminPassword using cmd `sudo cat /var/lib/jenkins/secrets/initialAdminPassword`,
-     - Install suggested plugin/Select Plugins to install as per you requirement.
-     - Click `skip and continue as admin`. (It is Recommended not to set Username and Password, then you will not have to change the 'import_xml.sh' script from jenkins-backup-code repository.
-     - On Instance Configuration Click `Save and Finish` 
-     - Click `Start using Jenkins`.
-5. SSH into the Virtual Machine.
-6. Clone [jenkins-backup-code](https://github.com/di-devops-poc/jenkins-backup-code.git) repository in the Virtual Machine.
-7. Change the directory cd jenkins-backup-code/create-jobs-xml.
-8. Run the script 'import_xml.sh' to import jobs in Jenkins. Command to run script `bash -x import_xml.sh gcp update_gcp_conf_tf`
-9. Voila! you have successfully imported jobs.
-   - Note: Change the Jenkins Credentials password in Jenkins if Job fails to clone the repository.
-10. You are good to go. Now you just have to start building Job to create Cluster.
+1. **Google Cloud Platform (GCP):**  
+   - Create a GCP Project.  
+   - Enable the following services:
+     - Google App Engine  
+     - Google Compute Engine  
+     - Google Cloud Storage (used for Terraform state and Jenkins backups)  
+   - Reserve a static IP address.
+
+2. **Domain Configuration:**  
+   - A domain is required for hosting Jenkins and the target application.  
+   - **Note:** This setup uses [deSEC](https://desec.io) for DNS management.
+
+3. **Required GitHub Repositories:**
+   - [`application-cpp-code`](https://github.com/CBN-Project-Deployment/Gridctrl_src_CplusPlus.git)  
+     Source code for the C++ MFC application, which serves as input to CbN.
+     
+   - [`gcp-devops-base`](https://github.com/shrikantpangudwale-code/gcp-devops-base.git)  
+     Contains Terraform and shell scripts to automate the deployment of the application on GCP App Engine.
+     
+   - [`cbn-workflow-execution-code`](https://github.com/CBN-Project-Deployment/CBN_Workflow_PY.git)  
+     Python scripts to trigger CbN API calls and execute workflows.
+     
+   - [`target-react-app`](https://github.com/CBN-Project-Deployment/React-Dep.git)  
+     React.js application code generated by CbN workflows.
+     
+   - [`application-documents`](https://github.com/CBN-Project-Deployment/App-Documentations.git)  
+     PDF documentation generated by CbN explaining the application structure and workflows.
+
+
+### Process
+
+1. **Clone the Repository**  
+  - Open the [Google Cloud Shell](https://shell.cloud.google.com) and clone the `gcp-devops-base` repository:
+   ```bash
+    git clone https://github.com/shrikantpangudwale-code/gcp-devops-base.git
+  ```  
+2. **Navigate to the Project Directory**
+  ```bash
+    cd gcp-devops-base
+  ```
+3. **Create `.env` file with Sensitive Credentials**
+  - `DESEC_Email=`
+  - `DESEC_API_TOKEN=`
+  - `github_user=`
+  - `github_cred=` 
+   - **Note**: The `.env` file is listed in `.gitignore` and is **not** part of the repository.
+4. **Update environment specific values**
+  - Edit the `configfile` and provide values according to your GCP and domain setup.
+5. **Make the Deployment Script Executable**
+  ```bash
+    chmod +x devops-base.sh
+  ```
+6. **Run the deployment script**
+  ```bash
+    sh devops-base.sh
+  ```
+7. **Access Jenkins**
+  - After successful deployment, Jenkins will be available at: `https://jenkins.nttd.dedyn.io`.
+8. **Run Jenkins Pipelines**
+  - The Jenkins dashboard will display pre-configured pipelines. Trigger them as needed to continue with CbN workflow execution and app deployment.
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
-### configfile
-Configfile contains different variables that you have to manually update for the first time.
-1. gcp_project : GCP Project Name
-2. gcp_gcr_project: GCP Project Name. Same as above (Variable used if container images are stored in different project.)
-3. gcp_region: GCP project region. e.g. (us-central1) 
-4. gcp_zone: GCP project zone. e.g. (us-central1-a)
-5. gcp_kubernetes_cluster: Name of Kubernetes Cluster as required.
-6. dns_name: DNS name for application. (If set).
-7. dns_zone: DNS zone name.
-   - Note: You have to manually create the DNS record for your Application External Service. (If required)
+### `configfile`
+
+The `configfile` contains environment-specific variables that must be manually configured before running the deployment script for the first time.
+
+| Variable              | Description                                                                 |
+|-----------------------|-----------------------------------------------------------------------------|
+| `gcp_project`         | Name of your Google Cloud Platform project                                  |
+| `gcp_region`          | GCP region to deploy resources (e.g. `asia-south1`)                         |
+| `terraform_gcs_name`  | Name of the GCS bucket to store the Terraform state file (e.g. `devops-terraform-state-01`) |
+| `jenkins_bkp_gcs`     | Name of the GCS bucket to store Jenkins backup files (e.g. `devops-jenkins-bkp`) |
+| `domain`              | Domain name used to access Jenkins and the deployed application (e.g. `nttd.dedyn.io`) |
+| `jenkins_subdomain`   | Subdomain for accessing Jenkins (e.g. `jenkins`)                            |
+| `app_subdoamin`       | Subdomain for accessing the React application on GCP App Engine (e.g. `app`) |
+| `github_base_url`     | Base URL of the GitHub repository                                           |
+
+> ⚠️ **Note:** Make sure to review and update each value to reflect your specific environment and project setup before proceeding with the deployment.
+
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
-Note : For better understanding check each directory in this repository and other two main repositories.
+
+⚠️ **Note:** For more details, refer to the `README.md` file present in each folder within the repository.

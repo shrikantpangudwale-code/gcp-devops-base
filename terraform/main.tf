@@ -21,10 +21,9 @@ data "google_compute_address" "reserved_ip" {
 
 resource "google_project_iam_member" "member-role" {
 for_each = toset([
-	"roles/dns.admin",
     "roles/storage.admin",
     "roles/compute.admin",
-	#"roles/appengine.admin",
+	  #"roles/appengine.admin",
     "roles/cloudbuild.builds.editor",
     "roles/iam.serviceAccountUser"
 	])
@@ -99,7 +98,8 @@ resource "google_compute_instance" "devops-vm" {
   }
 
   metadata = {
-    startup-script  = file("../02-main.sh")
+    startup-script  = file("../shell-scripts/01-startup-script.sh")
+    shutdown-script = file("../shell-scripts/06-jenkins-backup.sh")
     enable-oslogin  = true
     github-base-url = var.github_base_url
     github-user     = var.github_user

@@ -1,8 +1,9 @@
 #!/bin/bash
 set -e
 
+script_dir=${1}
+source ./${script_dir}/configfile
 JENKINS_HOME="/var/lib/jenkins"
-GROOVY_SRC="./${1}/groovy-scripts"
 
 # Install dependencies
 sudo apt update
@@ -28,7 +29,7 @@ sudo chown jenkins:jenkins ${JENKINS_HOME}/jenkins.install.*
 
 # Place init.groovy.d
 sudo mkdir -p ${JENKINS_HOME}/init.groovy.d/
-for script in ${GROOVY_SRC}/*.groovy; do
+for script in ./${script_dir}/groovy-scripts/*.groovy; do
   sudo cp "${script}" ${JENKINS_HOME}/init.groovy.d/
 done
 
@@ -40,3 +41,25 @@ sudo systemctl enable jenkins
 sudo systemctl start jenkins
 
 echo "Jenkins installation and configuration complete."
+
+# Restore the Jenkins
+# List files and get the latest jenkins-backup file
+LATEST_FILE=$(gsutil ls gs://${jenkins_bkp_gcs}/jenkins-backup-*.tar.gz | sort | tail -n 1)
+
+if [ -n "${LATEST_FILE}" ]
+then
+  echo "Found backup: ${LATEST_FILE}"
+  sudo systemctl stop jenkins
+
+  gsutil cp "${LATEST_FILE}" ${JENKINS_HOME}
+  ARCHIVE_NAME=$(basename "${LATEST_FILE}")
+  
+  echo "Extracting backup..."
+  sudo tar -xzvf "${JENKINS_HOME}/${ARCHIVE_NAME}" -C /
+  sudo chown -R jenkins:jenkins ${JENKINS_HOME}
+  
+  sudo systemctl start jenkins
+  echo "Restore of Jenkins completed successfully."
+else
+  echo "No backup file found in GCS."
+fi
