@@ -20,7 +20,7 @@ This project is developed by DevOps Engineers to automate the deployment of a **
 ### 📁 Project Structure Overview
 
 <p align="center">
-  <img width="360" alt="Project Architecture" src="https://user-images.githubusercontent.com/106592300/178190993-d9e8056e-3c75-42b6-b347-4f1756b2985f.PNG">
+  <img width="360" alt="Project Architecture" src="https://github.com/shrikantpangudwale-code/gcp-devops-base/blob/main/GCP-Devops-CbN.png?raw=true">
 </p>
 
 ### 📂 Repository Structure
@@ -91,12 +91,16 @@ This repository contains the following subdirectories:
   ```
 6. **Run the deployment script**
   ```bash
-    sh devops-base.sh
+    sh devops-base.sh create
   ```
 7. **Access Jenkins**
   - After successful deployment, Jenkins will be available at: `https://jenkins.nttd.dedyn.io`.
 8. **Run Jenkins Pipelines**
   - The Jenkins dashboard will display pre-configured pipelines. Trigger them as needed to continue with CbN workflow execution and app deployment.
+9. **Remove or delete all the infrastructure**
+  ```bash
+    sh devops-base.sh destroy
+  ```
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 ### `configfile`
 
