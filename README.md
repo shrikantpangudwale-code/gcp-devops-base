@@ -2,7 +2,7 @@
 
 This project is developed by DevOps Engineers to automate the deployment of a **Node.js application** on **Google App Engine** using modern CI/CD practices and tools on **Google Cloud Platform (GCP)**.
 
-### 🚀 Tools & Technologies Used
+### Tools & Technologies Used
 
 1. **Google Cloud Platform**
    - App Engine  
@@ -17,13 +17,13 @@ This project is developed by DevOps Engineers to automate the deployment of a **
 
 ---
 
-### 📁 Project Structure Overview
+### Project Structure Overview
 
 <p align="center">
   <img width="800" alt="Project Architecture" src="https://github.com/shrikantpangudwale-code/gcp-devops-base/blob/main/GCP-Devops-CbN.png?raw=true">
 </p>
 
-### 📂 Repository Structure
+### Repository Structure
 
 This repository contains the following subdirectories:
 
@@ -117,8 +117,8 @@ The `configfile` contains environment-specific variables that must be manually c
 | `app_subdoamin`       | Subdomain for accessing the React application on GCP App Engine (e.g. `app`) |
 | `github_base_url`     | Base URL of the GitHub repository                                           |
 
-> ⚠️ **Note:** Make sure to review and update each value to reflect your specific environment and project setup before proceeding with the deployment.
+> **Note:** Make sure to review and update each value to reflect your specific environment and project setup before proceeding with the deployment.
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-⚠️ **Note:** For more details, refer to the `README.md` file present in each folder within the repository.
+**Note:** For more details, refer to the `README.md` file present in each folder within the repository.
