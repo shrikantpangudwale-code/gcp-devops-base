@@ -20,7 +20,7 @@ This project is developed by DevOps Engineers to automate the deployment of a **
 ### 📁 Project Structure Overview
 
 <p align="center">
-  <img width="500" alt="Project Architecture" src="https://github.com/shrikantpangudwale-code/gcp-devops-base/blob/main/GCP-Devops-CbN.png?raw=true">
+  <img width="800" alt="Project Architecture" src="https://github.com/shrikantpangudwale-code/gcp-devops-base/blob/main/GCP-Devops-CbN.png?raw=true">
 </p>
 
 ### 📂 Repository Structure
