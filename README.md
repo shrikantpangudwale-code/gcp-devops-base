@@ -51,7 +51,7 @@ This repository contains the following subdirectories:
 
 3. **Required GitHub Repositories:**
    - [`application-cpp-code`](https://github.com/CBN-Project-Deployment/Gridctrl_src_CplusPlus.git)  
-     Source code for the C++ MFC application, which serves as input to CbN.
+     Source code for the VC++ MFC application, which serves as input to CbN.
      
    - [`gcp-devops-base`](https://github.com/shrikantpangudwale-code/gcp-devops-base.git)  
      Contains Terraform and shell scripts to automate the deployment of the application on GCP App Engine.
