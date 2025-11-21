@@ -61,7 +61,7 @@ echo "Jenkins installation and configuration complete."
 
 # Restore the Jenkins
 # List files and get the latest jenkins-backup file
-LATEST_FILE=$(gsutil ls gs://${jenkins_bkp_gcs}/jenkins-backup-*.tar.gz | sort | tail -n 1)
+LATEST_FILE=$(gsutil ls gs://${jenkins_bkp_gcs}/jenkins_backup_*.tar.gz | sort | tail -n 1)
 
 if [ -n "${LATEST_FILE}" ]
 then
