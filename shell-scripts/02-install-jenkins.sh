@@ -12,6 +12,16 @@ sudo apt install -y openjdk-21-jre python3 curl unzip gnupg2 software-properties
 curl -fsSL https://deb.nodesource.com/setup_25.x | sudo -E bash -
 sudo apt install nodejs -y
 
+# Install pandoc, Inkscape
+sudo apt install -y \
+    pandoc \
+    texlive-full \
+    graphviz \
+    fonts-noto fonts-noto-cjk
+
+pip install pyyaml
+npm install -g mermaid-filter
+
 # Install Jenkins
 curl -fsSL https://pkg.jenkins.io/debian/jenkins.io-2023.key | sudo tee \
   /usr/share/keyrings/jenkins-keyring.asc > /dev/null
