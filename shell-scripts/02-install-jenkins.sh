@@ -8,7 +8,9 @@ jenkins_backup="/var/backups/jenkins"
 
 # Install dependencies
 sudo apt update
-sudo apt install -y openjdk-21-jre python3 curl unzip gnupg2 software-properties-common python3-venv python3-pip npm
+sudo apt install -y openjdk-21-jre python3 curl unzip gnupg2 software-properties-common python3-venv python3-pip
+curl -fsSL https://deb.nodesource.com/setup_25.x | sudo -E bash -
+sudo apt install nodejs -y
 
 # Install Jenkins
 curl -fsSL https://pkg.jenkins.io/debian/jenkins.io-2023.key | sudo tee \

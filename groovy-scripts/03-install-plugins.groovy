@@ -11,7 +11,9 @@ def plugins = [
     'blueocean',
     'credentials-binding',
     'pipeline',
-    'pipeline-stage-view'
+    'pipeline-stage-view',
+	'ws-cleanup',
+	'ansicolor'
 ]
 
 println "--> Checking Jenkins plugins..."
